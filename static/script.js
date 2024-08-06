@@ -29,6 +29,20 @@ document.addEventListener('DOMContentLoaded', () => {
         chatHistory.scrollTop = chatHistory.scrollHeight;
     }
 
+     function showNotification(message) {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.classList.add('show');
+
+        setTimeout(() => {
+            notification.style.animation = 'fadeOut 1s ease-out';
+            notification.addEventListener('animationend', () => {
+                notification.classList.remove('show');
+                notification.style.animation = '';
+            }, { once: true });
+        }, 3000);
+    }
+
     async function processPrompt() {
         const prompt = promptInput.value.trim();
         if (!prompt) return;
@@ -51,6 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await response.json();
             addMessage(data.response);
+
+            // Show notification based on the function called
+            if (data.function_called === 'take_screenshot') {
+                showNotification('Screenshot captured');
+            } else if (data.function_called === 'web_cam_capture') {
+                showNotification('Webcam image captured');
+            } else if (data.function_called === 'get_clipboard_text') {
+                showNotification('Clipboard content extracted');
+            }
         } catch (error) {
             console.error('Error:', error);
             addMessage('An error occurred while processing your request.');

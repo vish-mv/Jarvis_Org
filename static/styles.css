@@ -178,6 +178,28 @@ h1 {
     border-radius: 50%;
     animation: fall linear forwards;
 }
+.notification {
+    position: fixed;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4ecca3;
+    color: #1a1a2e;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(78, 204, 163, 0.5);
+    transition: top 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+.notification.show {
+    top: 20px;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
 
 @keyframes fall {
     to {
