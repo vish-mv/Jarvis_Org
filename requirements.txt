@@ -5,3 +5,8 @@ opencv_python==4.9.0.80
 Pillow==10.3.0
 SpeechRecognition==3.10.1
 pyperclip==1.8.2
+Flask
+python-dotenv
+google-generativeai
+Pillow
+pyperclip
