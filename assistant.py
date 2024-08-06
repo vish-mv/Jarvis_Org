@@ -56,7 +56,7 @@ def groq_prompt(prompt,img_context):
     if img_context:
         prompt = f'USER PROMPT: {prompt}\n\n  IMAGE CONTEXT: {img_context}'
     convo.append({'role': 'user', 'content': prompt})
-    chat_completion = groq_client.chat.completions.create(messages=convo,model='llama3-70b-8192')
+    chat_completion = groq_client.chat.completions.create(messages=convo,model='llama-3.1-70b-versatile')
     response = chat_completion.choices[0].message
     convo.append(response)
     return response.content
@@ -71,7 +71,7 @@ def function_call(prompt):
              )
     function_convo = [{'role':'system','content':sys_msg},
                       {'role':'user','content':prompt}]
-    chat_completion = groq_client.chat.completions.create(messages=function_convo, model='llama3-70b-8192')
+    chat_completion = groq_client.chat.completions.create(messages=function_convo, model='llama-3.1-70b-versatile')
     response = chat_completion.choices[0].message
     return response.content
 def take_screenshot():
@@ -116,19 +116,23 @@ def process():
     prompt = request.json['prompt']
     call = function_call(prompt)
     visual_context = None
+    function_called = None
 
     if 'take screenshot' in call:
         take_screenshot()
         visual_context = vision_prompt(prompt=prompt, photo_path='screenshot.jpg')
+        function_called = 'take_screenshot'
     elif 'capture webcam' in call:
         web_cam_capture()
         visual_context = vision_prompt(prompt=prompt, photo_path='web_cam.jpg')
+        function_called = 'web_cam_capture'
     elif 'extract clipboard' in call:
         paste = get_clipboard_text()
         prompt = f'{prompt}\n\nCLIPBOARD CONTENT: {paste}'
+        function_called = 'get_clipboard_text'
 
     response = groq_prompt(prompt=prompt, img_context=visual_context)
-    return jsonify({'response': response})
+    return jsonify({'response': response, 'function_called': function_called})
 
 if __name__ == '__main__':
     app.run(debug=True)
