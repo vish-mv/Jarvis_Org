@@ -87,17 +87,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function createStar() {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        star.style.left = `${Math.random() * 100}vw`;
-        star.style.animationDuration = `${Math.random() * 3 + 2}s`;
-        document.querySelector('.background-animation').appendChild(star);
+   function createFallingNumber() {
+  const number = document.createElement('div');
+  number.classList.add('falling-number');
+  number.textContent = Math.floor(Math.random() * 10);
+  number.style.left = `${Math.random() * 100}vw`;
+  number.style.fontSize = `${Math.floor(Math.random() * 20) + 1}px`;
+  number.style.animationDuration = `${Math.random() * 3 + 2}s`;
+  document.querySelector('.background-animation').appendChild(number);
 
-        star.addEventListener('animationend', () => {
-            star.remove();
-        });
-    }
+  number.addEventListener('animationend', () => {
+    number.remove();
+  });
+}
 
-    setInterval(createStar, 100);
+setInterval(createFallingNumber, 100);
+
+
+function createFallingLetter() {
+  const letter = document.createElement('div');
+  letter.classList.add('falling-letter');
+  letter.textContent = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  letter.style.left = `${Math.random() * 100}vw`;
+  letter.style.fontSize = `${Math.floor(Math.random() * 20  ) + 1}px`;
+  letter.style.animationDuration = `${Math.random() * 3 + 2}s`;
+  document.querySelector('.background-animation').appendChild(letter);
+
+  letter.addEventListener('animationend', () => {
+    letter.remove();
+  });
+}
+
+setInterval(createFallingLetter, 100);
+
 });

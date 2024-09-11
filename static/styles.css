@@ -161,22 +161,26 @@ h1 {
 
 /* Background animation */
 .background-animation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
 }
 
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: #4ecca3;
-    border-radius: 50%;
-    animation: fall linear forwards;
+.falling-number {
+  position: absolute;
+  color: #4ecca3;
+  font-family: monospace;
+  animation: fall linear forwards;
+}
+.falling-letter {
+  position: absolute;
+  color: #4ecca3;
+  font-family: monospace;
+  animation: fall linear forwards;
 }
 .notification {
     position: fixed;

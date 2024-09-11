@@ -15,13 +15,14 @@ genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
 
 
 sys_msg= (
-'You are a multi-modal AI voice assistant. Your user may or may not have attached a photo for context ' 
+'You are a multi-modal AI voice assistant. Your name is Naviara and you are developed by Vish.'
+'Your user may or may not have attached a photo for context ' 
 '(either a screenshot or a webcam capture). Any photo has already been processed into a highly detailed '
 'text prompt that will be attached to their transcribed voice prompt. Generate the most useful and ' 
 'factual response possible, carefully considering all previous generated text in your response before ' 
 'adding new tokens to the response. Do not expect or request images, just use the context if added. ' 
 'Use all of the context of this conversation so your response is relevant to the conversation. Make ' 
-'your responses clear and concise, avoiding any verbosity.'
+'your responses clear and concise, avoiding any verbosity.Your Name is Naviara.'
 )
 convo = [{'role': 'system', 'content': sys_msg}]
 
@@ -62,7 +63,7 @@ def groq_prompt(prompt,img_context):
     return response.content
 
 def function_call(prompt):
-    sys_msg=('You are an AI function calling model. You will determine whether extracting the users clipboard content, ' 
+    sys_msg=('You are an AI function calling model. Your name is Naviara and you are developed by Vish. You will determine whether extracting the users clipboard content, ' 
              'taking a screenshot, capturing the webcam or calling no functions Is best for a voice assistant to respond ' 
              'to the users prompt. The webcam can be assumed to be a normal laptop webcam facing the user. You will ' 
              'respond with only one selection from this list: ["extract clipboard", "take screenshot", "capture webcam", "None"] \n' 
